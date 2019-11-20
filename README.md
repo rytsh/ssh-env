@@ -27,6 +27,11 @@ OPTIONS:
         This help page
 ```
 
+Or just run by own
+```shell
+docker run -d -p 2222:22 --name ssh-env ryts/ssh-env
+```
+
 ## Get in with ssh
 Connect ssh's `2222` port with `root1234` password
 ```shell
