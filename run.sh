@@ -126,7 +126,7 @@ fi
 output=$(docker ps -a --format {{.Names}} | grep ${CONTAINER_NAME})
 if [[ ! $output ]]; then
 	echo "Docker Run"
-	docker run -d -p 2222:22 --name "${CONTAINER_NAME}" "${IMAGE_NAME}"
+	docker run -d --rm -p 2222:22 -v /:/workspace --name "${CONTAINER_NAME}" "${IMAGE_NAME}"
 else
 	output=$(docker ps --format {{.Names}} | grep ${CONTAINER_NAME})
 	if [[ $output ]]; then

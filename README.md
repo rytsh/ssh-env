@@ -1,6 +1,23 @@
-# SSH-ENV container
-SSH connection in docker for development environment.
+# SSH-ENV container reach to root folder of machine
+SSH connection in docker for development environment. And changing root folder with chroot command.
 
+You should mount root folder to /workspace folder. (__WARNING EXTREMLY DANGEROUS__)
+
+> https://hub.docker.com/r/ryts/ssh-env
+
+```shell
+docker run -d --rm -p 2222:22 -v /:/workspace --name ssh-env ryts/ssh-env
+```
+
+You don't have to add `-v /:/workspace` option.
+
+## Get in with ssh
+Connect ssh's `2222` port with `root1234` password
+```shell
+ssh -p 2222 root@localhost
+```
+
+## With shell script to build and run
 Change expose port number inside run.sh to fit your app.
 
 ```shell
@@ -25,15 +42,4 @@ OPTIONS:
         (--remove con --remove image)
     -h, --help
         This help page
-```
-
-Or just run by own
-```shell
-docker run -d -p 2222:22 --name ssh-env ryts/ssh-env
-```
-
-## Get in with ssh
-Connect ssh's `2222` port with `root1234` password
-```shell
-ssh -p 2222 root@localhost
 ```

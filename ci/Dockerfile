@@ -21,8 +21,13 @@ RUN echo "root:root1234" | chpasswd && \
     > /etc/issue.net && \
     echo 'Welcome to container land' > /etc/motd
 
+# if not found a root workspace, it will ignore
+RUN echo "chroot /workspace /bin/sh" > /root/.profile
+
+WORKDIR /workspace
+
 EXPOSE 22
 
 ENTRYPOINT ["/bin/sh"]
 
-CMD ["-c", "ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa && /usr/sbin/sshd -D"]
+CMD ["-c", "ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t ecdsa -b 256 && /usr/sbin/sshd -D"]
